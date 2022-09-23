@@ -38,7 +38,10 @@ def connect_db():
 
 def download_vid():
     urlsList = [
- "dsadaswasf"
+    "https://www.youtube.com/watch?v=fjLIkF01a7Y", #Mapache comiendo uvas
+    "https://www.youtube.com/watch?v=E5xC9i_1vvY", #Thor love and thunder
+    "https://www.youtube.com/watch?v=ycz1K-vi-tg", #Off de roblox
+    "https://www.youtube.com/watch?v=VZzSBv6tXMw", #Minero del rubius
     ]
     for url in urlsList:
         thDownload = threading.Thread(target = get_video, args=[url])
