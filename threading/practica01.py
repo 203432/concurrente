@@ -16,7 +16,7 @@ def get_service():
     if response.status_code == 200 :
         data = response.json()
         for dataout in data:
-            cursor1.execute("insert into prueba1(title) values ('"+dataout["title"]+"')")
+            cursor1.execute("insert into prueba1(texto) values ('"+dataout["title"]+"')")
         conexion.commit()
         conexion.close()
     else:

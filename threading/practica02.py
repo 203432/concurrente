@@ -55,9 +55,9 @@ def get_video(url):
 
 if __name__ == '__main__':
     thVideo = threading.Thread(target = download_vid)
-    # thRegister = threading.Thread(target= register_db)
+    thRegister = threading.Thread(target= register_db)
     thVideo.start()
-    # thRegister.start()
-    # for x in range(0,50):
-    #    thService = threading.Thread(target = get_services, args=[x])
-    #    thService.start()
+    thRegister.start()
+    for x in range(0,50):
+       thService = threading.Thread(target = get_services, args=[x])
+       thService.start()

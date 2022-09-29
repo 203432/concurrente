@@ -1,11 +1,12 @@
 from threading import Thread, Semaphore
 from pytube import YouTube
 semaforo = Semaphore(1)
+import time
 
 def critico(id,url):
     print("Hilo = "+str(id)+" => "+url)
     yt = YouTube(url)
-    yt.streams.filter(progressive=True, file_extension='mp4').order_by('resolution').desc().first().download()
+    yt.streams.filter(progressive=True, file_extension='mp4').order_by('resolution').desc().first().download("C:/Users/camac/Documents/concurrente/files/semaphore")
     print(yt)
     print("Video descargado con exito")
 
@@ -27,5 +28,8 @@ thread_semaforo = [
     Hilo(4,"https://www.youtube.com/watch?v=ycz1K-vi-tg"), #Off de roblox
     Hilo(5,"https://www.youtube.com/watch?v=VZzSBv6tXMw"), #Minero del rubius
     ]
+init_time = time.time()
 for t in thread_semaforo:
     t.start()
+end_time = time.time() - init_time
+print(end_time)
