@@ -14,6 +14,9 @@ def comer(id):
         print("La persona " +str(id)+ " esta usando Palillo izquierdo Num: "+str(palillos[palIzq].num)+" y Palillo derecho es el numero "+str(palillos[palder].num)  )
         print("Comiendo ")
         sleep(10)
+        print("La persona "+str(id)+" dejo de comer")
+        print("Solto los palillos: "+str(palillos[palIzq].num)+" y "+str(palillos[palder].num))
+        print("-----------------------------------------")
         palillos[palIzq].estado = "libre"
         palillos[palIzq].ocupadoPor = id
         palillos[palder].estado = "libre"
