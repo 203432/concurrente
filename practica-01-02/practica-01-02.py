@@ -7,7 +7,6 @@ semaforoProductor = Semaphore(1)
 PERSONAS = 9
 PRODUCTORES = 5
 CONSUMIDORES = 5
-COMER_CONTA = 100
 almacen = [];
 
 
@@ -33,7 +32,7 @@ class Productor(Thread):
         semaforoProductor.acquire()
 
     def run(self):
-        for i in range(10):
+        for i in range(100):
             time.sleep(1)
             if len(almacen) > 5:
                 self.bloquear()
@@ -60,7 +59,7 @@ class Consumidor(Thread):
                 
 
     def run(self):
-        for i in range(10):
+        for i in range(100):
             time.sleep(3)
             self.consumir()
             
