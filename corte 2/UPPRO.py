@@ -203,15 +203,17 @@ if __name__ == '__main__':
 
 
 
-# Breaking Bad es una serie de televisión dramática estadounidense creada y producida por Vince Gilligan. Narra 
-# la historia de Walter White (Bryan Cranston), un profesor de química con problemas económicos a quien le diagnostican 
-# un cáncer de pulmón inoperable. Para pagar su tratamiento y asegurar el futuro económico de su familia, comienza a 
-# cocinar y vender metanfetamina,4​ junto con Jesse Pinkman (Aaron Paul), un antiguo alumno suyo. La serie, ambientada 
-# y producida en Albuquerque (Nuevo México), se caracteriza por sus escenarios desérticos y por la tendencia en la 
-# historia de poner a sus personajes en situaciones que aparentemente no tienen salida, lo que llevó a que su creador
-#  la describa como un wéstern contemporáneo.5​
+"""
+Breaking Bad es una serie de televisión dramática estadounidense creada y producida por Vince Gilligan. Narra 
+la historia de Walter White (Bryan Cranston), un profesor de química con problemas económicos a quien le diagnostican 
+un cáncer de pulmón inoperable. Para pagar su tratamiento y asegurar el futuro económico de su familia, comienza a 
+cocinar y vender metanfetamina,4​ junto con Jesse Pinkman (Aaron Paul), un antiguo alumno suyo. La serie, ambientada 
+y producida en Albuquerque (Nuevo México), se caracteriza por sus escenarios desérticos y por la tendencia en la 
+historia de poner a sus personajes en situaciones que aparentemente no tienen salida, lo que llevó a que su creador
+la describa como un wéstern contemporáneo.5​
 
-# La serie se estrenó el 20 de enero de 2008 y es una producción de Sony Pictures Television. En Estados Unidos y Canadá 
-# se emitió por la cadena AMC.6​ La temporada final se dividió en dos partes de ocho episodios cada una y se emitió en el 
-# transcurso de dos años: la primera mitad se estrenó el 15 de julio de 2012 y concluyó el 2 de septiembre de 2012, 
-# mientras que la segunda mitad se estrenó el 11 de agosto de 2013 y concluyó el 29 de septiembre del mismo año.7​
+La serie se estrenó el 20 de enero de 2008 y es una producción de Sony Pictures Television. En Estados Unidos y Canadá 
+se emitió por la cadena AMC.6​ La temporada final se dividió en dos partes de ocho episodios cada una y se emitió en el 
+transcurso de dos años: la primera mitad se estrenó el 15 de julio de 2012 y concluyó el 2 de septiembre de 2012, 
+mientras que la segunda mitad se estrenó el 11 de agosto de 2013 y concluyó el 29 de septiembre del mismo año.7​
+"""
