@@ -4,16 +4,7 @@ import time
 semaforoConsumidor = Semaphore(1)
 semaforoProductor = Semaphore(1)
 
-PERSONAS = 9
-PRODUCTORES = 5
-CONSUMIDORES = 5
 almacen = [];
-
-
-class item(Thread):
-    def __init__(self,id):
-        super(Productor,self).__init__()
-        self.id = id
 
 class Productor(Thread):
     def __init__(self,id):
