@@ -24,4 +24,9 @@ pip install PyGreSQL
 ```
 
 
+## La actividad 5 esta en la carpeta corte 2 nombrada como UPPRO
+ Se me olvido subir la version mostrada en clase:
+ El commit "Meseros Fixed" Contiene la version mostrada el viernes 4
+
+
  

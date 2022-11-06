@@ -122,10 +122,13 @@ class Cocinero(Thread):
         self.id = id
 
     def cocinar(self):
-        print("El cocinero "+ self.id+" cocinara la  orden "+ordenes[0])
-        time.sleep(10)
-        print("Cocinero cocino orden num."+ordenes[0])
-        comidasListas.append(ordenes.pop(0))
+        try:
+            print("El cocinero "+ self.id+" cocinara la  orden "+ordenes[0])
+            time.sleep(10)
+            print("Cocinero cocino orden num."+ordenes[0])
+            comidasListas.append(ordenes.pop(0))
+        except:
+            self.run()
         
     def run(self):
         if len(ordenes) <= 0:
@@ -134,7 +137,10 @@ class Cocinero(Thread):
             self.run()
         else:
             while len(ordenes) > 0:
+                time.sleep(int(self.id))
                 self.cocinar()
+        if len(restaurante_NoAtendidos) <= 0:
+            self.run()
 
 
 class Mesero(Thread):
@@ -143,17 +149,20 @@ class Mesero(Thread):
         self.id = id
 
     def tomar_orden(self):
-        if len(restaurante_NoAtendidos) == 0:
-            print("Meseros en espera")
-        else:
-         ordenLista = False
-         print("El mesero"+self.id+" le esta tomando la orden al cliente no."+restaurante_NoAtendidos[0])
-         time.sleep(3)
-         print("la orden del cliente no."+restaurante_NoAtendidos[0]+" ha sido agregada")
-         ordenes.append(restaurante_NoAtendidos[0])
-         restaurante_Atendidos.append(restaurante_NoAtendidos.pop(0))
-        if len(ordenes) <= 0:
-            conditionCocinero.release()
+        try:
+            if len(restaurante_NoAtendidos) == 0:
+                print("Meseros en espera")
+            else:
+                ordenLista = False
+                print("El mesero"+self.id+" le esta tomando la orden al cliente no."+restaurante_NoAtendidos[0])
+                time.sleep(3)
+                print("la orden del cliente no."+restaurante_NoAtendidos[0]+" ha sido agregada")
+                ordenes.append(restaurante_NoAtendidos[0])
+                restaurante_Atendidos.append(restaurante_NoAtendidos.pop(0))
+            if len(ordenes) <= 0:
+                conditionCocinero.release()
+        except:
+            self.run()
 
 
     def run(self):
@@ -162,7 +171,7 @@ class Mesero(Thread):
             time.sleep(10)
             self.run()
         else:
-            time.sleep(int(self.id)*3)
+            time.sleep(int(self.id)*2)
             while len(restaurante_NoAtendidos) > 0:
                 self.tomar_orden()
             
