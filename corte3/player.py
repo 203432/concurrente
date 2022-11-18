@@ -3,14 +3,14 @@ from settings import *
 from support import *
 
 class Player(pygame.sprite.Sprite):
-    def __init__(self,pos, groups, obstacle_sprites):
+    def __init__(self,pos, groups, obstacle_sprites,create_attack,destroy_attack):
         super().__init__(groups)
         self.image = pygame.image.load('corte3/images/idle_down.png').convert_alpha()
         self.rect = self.image.get_rect(topleft = pos)
         self.hitbox = self.rect.inflate(0,-26)
 
         self.import_assets()
-        self.status= 'down'
+        self.status = 'down'
         self.frame_index =  0
         self.animation_speed = 0.15
 
@@ -22,6 +22,13 @@ class Player(pygame.sprite.Sprite):
 
         self.obstacle_sprites = obstacle_sprites
 
+        self.create_attack = create_attack
+        self.destroy_attack = destroy_attack
+        self.weapon_index = 0
+        self.weapon = list(weapon_data.keys())[self.weapon_index]
+        self.cambiar_arma = True
+        self.cambiar_arma_tiempo = None
+        self.duracion_cambio = 200
     def import_assets(self):
         path_assets = 'corte3/graficos/jugador/'
         self.animations ={
@@ -75,12 +82,21 @@ class Player(pygame.sprite.Sprite):
             if keys[pygame.K_SPACE]:
                 self.ataque = True
                 self.ataque_time = pygame.time.get_ticks()
-                print('atacandooooo')
+                self.create_attack()
 
             if keys[pygame.K_q]:
                 self.ataque = True
                 self.ataque_time = pygame.time.get_ticks()
                 print('toma tu magia prro')
+
+            if keys[pygame.K_z] and self.cambiar_arma:
+                self.cambiar_arma = False
+                self.cambiar_arma_tiempo = pygame.time.get_ticks()
+                if self.weapon_index < len(list(weapon_data.keys()))-1:
+                    self.weapon_index += 1
+                else:
+                    self.weapon_index = 0
+                self.weapon = list(weapon_data.keys())[self.weapon_index]
 
     def move(self,speed):
         if self.direction.magnitude() != 0:
@@ -114,6 +130,11 @@ class Player(pygame.sprite.Sprite):
         if self.ataque:
             if current_time - self.ataque_time >= self.cooldown:
                 self.ataque = False
+                self.destroy_attack()
+
+            if not self.cambiar_arma:
+                if current_time - self.cambiar_arma_tiempo >= self.duracion_cambio:
+                    self.cambiar_arma = True
 
     def animate(self):
         animation = self.animations[self.status]
