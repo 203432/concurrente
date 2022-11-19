@@ -3,7 +3,7 @@ from settings import *
 from support import *
 
 class Player(pygame.sprite.Sprite):
-    def __init__(self,pos, groups, obstacle_sprites,create_attack,destroy_attack):
+    def __init__(self,pos, groups, obstacle_sprites,create_attack,destroy_attack,create_magic):
         super().__init__(groups)
         self.image = pygame.image.load('corte3/images/idle_down.png').convert_alpha()
         self.rect = self.image.get_rect(topleft = pos)
@@ -15,7 +15,6 @@ class Player(pygame.sprite.Sprite):
         self.animation_speed = 0.15
 
         self.direction = pygame.math.Vector2()
-        self.speed = 10
         self.ataque = False
         self.cooldown = 400
         self.ataque_time = None
@@ -29,6 +28,20 @@ class Player(pygame.sprite.Sprite):
         self.cambiar_arma = True
         self.cambiar_arma_tiempo = None
         self.duracion_cambio = 200
+
+        self.create_magic = create_magic
+        self.magic_index = 0
+        self.magic = list(magic_data.keys())[self.magic_index]
+        self.can_switch_magic = True
+        self.magic_switch_time = None
+
+        self.stats = {'salud':100,'estamina':60,'ataque':10,'mana':4,'velocidad':10}
+        self.health = self.stats['salud'] * 0.5
+        self.energy = self.stats['estamina']  * 0.8  
+        self.exp = 123
+        self.speed = self.stats['velocidad']
+
+
     def import_assets(self):
         path_assets = 'corte3/graficos/jugador/'
         self.animations ={
@@ -46,10 +59,10 @@ class Player(pygame.sprite.Sprite):
                 self.status = self.status + '_idle'
         
         if self.ataque:
-            self.direction.x == 0 
-            self.direction == 0
+            self.direction.x = 0 
+            self.direction.y = 0
             if not 'attack' in self.status:
-                if 'idle i self.status':
+                if 'idle' in self.status:
                     self.status = self.status.replace('_idle', '_attack')
                 else:
                     self.status = self.status + '_attack'
@@ -84,12 +97,16 @@ class Player(pygame.sprite.Sprite):
                 self.ataque_time = pygame.time.get_ticks()
                 self.create_attack()
 
-            if keys[pygame.K_q]:
+            if keys[pygame.K_f]:
                 self.ataque = True
                 self.ataque_time = pygame.time.get_ticks()
-                print('toma tu magia prro')
 
-            if keys[pygame.K_z] and self.cambiar_arma:
+                style = list(magic_data.keys())[self.magic_index]
+                strength = list(magic_data.values())[self.magic_index]['strength'] + self.stats['mana']
+                cost = list(magic_data.values())[self.magic_index]['cost']
+                self.create_magic(style,strength,cost)
+
+            if keys[pygame.K_q] and self.cambiar_arma:
                 self.cambiar_arma = False
                 self.cambiar_arma_tiempo = pygame.time.get_ticks()
                 if self.weapon_index < len(list(weapon_data.keys()))-1:
@@ -98,6 +115,14 @@ class Player(pygame.sprite.Sprite):
                     self.weapon_index = 0
                 self.weapon = list(weapon_data.keys())[self.weapon_index]
 
+            if keys[pygame.K_e] and self.can_switch_magic:
+                self.can_switch_magic = False
+                self.magic_switch_time = pygame.time.get_ticks()
+                if self.magic_index < len(list(magic_data.keys()))-1:
+                    self.magic_index += 1
+                else:
+                    self.magic_index = 0
+                self.magic = list(magic_data.keys())[self.magic_index]
     def move(self,speed):
         if self.direction.magnitude() != 0:
             self.direction = self.direction.normalize()
@@ -135,6 +160,10 @@ class Player(pygame.sprite.Sprite):
             if not self.cambiar_arma:
                 if current_time - self.cambiar_arma_tiempo >= self.duracion_cambio:
                     self.cambiar_arma = True
+            
+            if not self.can_switch_magic:
+                if current_time - self.magic_switch_time >= self.duracion_cambio:
+                    self.can_switch_magic = True
 
     def animate(self):
         animation = self.animations[self.status]
