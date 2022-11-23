@@ -8,7 +8,7 @@ class Player(Entity):
         super().__init__(groups)
         self.image = pygame.image.load('corte3/images/idle_down.png').convert_alpha()
         self.rect = self.image.get_rect(topleft = pos)
-        self.hitbox = self.rect.inflate(0,-26)
+        self.hitbox = self.rect.inflate(-10,-26)
 
         self.import_assets()
         self.status = 'down'
@@ -156,3 +156,5 @@ class Player(Entity):
         self.animate()
         self.move(self.speed)
         
+    def run(self):
+        self.update()

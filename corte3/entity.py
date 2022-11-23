@@ -1,8 +1,10 @@
 import pygame
+from threading import Thread
 
-class Entity(pygame.sprite.Sprite):
+class Entity(pygame.sprite.Sprite,Thread):
     def __init__(self,groups):
         super().__init__(groups)
+        Thread.__init__(self)
         self.frame_index = 0
         self.animation_speed  = 0.15
         self.direction = pygame.math.Vector2()

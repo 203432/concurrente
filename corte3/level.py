@@ -57,11 +57,13 @@ class Level:
                                 self.destroy_attack,
                                 self.create_magic)
                             else:
-                                if col == '390': monster_name ='bamboo'
-                                elif col== '391': monster_name ='spirit'
+                                if col == '390': monster_name ='ghost'
+                                elif col== '391': monster_name ='slime'
                                 elif col=='392':monster_name = 'raccoon'
                                 else: monster_name= 'squid'
-                                Enemy(monster_name,(x,y),[self.visible_sprites],self.obstacle_sprites)
+                            enemy = Enemy(monster_name,(x,y),[self.visible_sprites],self.obstacle_sprites)
+                            enemy.start()
+
 
     def create_attack(self):
         self.current_attack = Weapon(self.player,[self.visible_sprites])
@@ -107,3 +109,15 @@ class YSortCameraGroup(pygame.sprite.Group):
         enemy_sprites = [sprite for sprite in self.sprites() if hasattr(sprite,'sprite_type') and sprite.sprite_type == 'enemy']
         for enemy in enemy_sprites:
             enemy.enemy_update(player)
+
+
+# Better Call Saul es una serie de televisión estadounidense de drama creada por Vince Gilligan y Peter Gould, derivada 
+# (spin-off) de Breaking Bad (2008-2013), también creada por Gilligan y de la que constituye a la vez una precuela y secuela.
+
+# Ambientada entre principios y mediados de la década de 2000, la serie sigue la historia de Jimmy McGill 
+# (interpretado por Bob Odenkirk), un estafador convertido en abogado y que posteriormente sería conocido como 
+# Saul Goodman. La narración comienza seis años antes de los eventos de Breaking Bad y muestra la transformación 
+# de McGill de ex-estafador de poca monta hasta convertirse en el abogado Saul Goodman, uno de los personajes principales 
+# de Breaking Bad. La serie también explora parte del pasado de Mike Ehrmantraut (Jonathan Banks) y las circunstancias que 
+# lo llevaron a convertirse tanto en la mano derecha del narcotráficante Gus Fring (Giancarlo Esposito) como en el detective´
+# privado al que McGill usualmente recurre en Breaking Bad.
