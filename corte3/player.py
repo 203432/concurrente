@@ -1,6 +1,6 @@
 import pygame
 from settings import *
-from support import *
+from support import import_folder
 from entity import *
 
 class Player(Entity):
@@ -16,7 +16,6 @@ class Player(Entity):
         self.ataque = False
         self.cooldown = 400
         self.ataque_time = None
-
         self.obstacle_sprites = obstacle_sprites
 
         self.create_attack = create_attack
@@ -34,10 +33,14 @@ class Player(Entity):
         self.magic_switch_time = None
 
         self.stats = {'salud':100,'estamina':60,'ataque':10,'mana':4,'velocidad':10}
-        self.health = self.stats['salud'] * 0.5
-        self.energy = self.stats['estamina']  * 0.8  
+        self.health = self.stats['salud']
+        self.energy = self.stats['estamina'] 
         self.exp = 123
         self.speed = self.stats['velocidad']
+
+        self.vulnerable = True
+        self.hurt_time = None
+        self.invulnerability_duration = 500
 
 
     def import_assets(self):
@@ -49,8 +52,7 @@ class Player(Entity):
         for animation in self.animations.keys():
             full_path = path_assets + animation
             self.animations[animation] =  import_folder(full_path)
-            print(self.animations)
-
+            
     def get_status(self):
         if self.direction.x == 0 and self.direction.y == 0:
             if not 'idle' in self.status and not 'attack' in self.status:
@@ -126,17 +128,21 @@ class Player(Entity):
     def cooldowns(self):
         current_time = pygame.time.get_ticks()
         if self.ataque:
-            if current_time - self.ataque_time >= self.cooldown:
+            if current_time - self.ataque_time >= self.cooldown + weapon_data[self.weapon]['cooldown']:
                 self.ataque = False
                 self.destroy_attack()
 
-            if not self.cambiar_arma:
-                if current_time - self.cambiar_arma_tiempo >= self.duracion_cambio:
+        if not self.cambiar_arma:
+            if current_time - self.cambiar_arma_tiempo >= self.duracion_cambio:
                     self.cambiar_arma = True
             
-            if not self.can_switch_magic:
-                if current_time - self.magic_switch_time >= self.duracion_cambio:
+        if not self.can_switch_magic:
+            if current_time - self.magic_switch_time >= self.duracion_cambio:
                     self.can_switch_magic = True
+
+        if not self.vulnerable:
+            if current_time - self.hurt_time >= self.invulnerability_duration:
+                    self.vulnerable = True
 
     def animate(self):
         animation = self.animations[self.status]
@@ -149,12 +155,21 @@ class Player(Entity):
         self.rect = self.image.get_rect(center = self.hitbox.center)
 
 
+
+    def get_full_weapon_damage(self):
+        base_damage = self.stats['ataque']
+        weapon_damage = weapon_data[self.weapon]['damage']
+
+        return base_damage + weapon_damage 
+
+
     def update(self):
         self.input()
         self.cooldowns()
         self.get_status()
         self.animate()
         self.move(self.speed)
+        
         
     def run(self):
         self.update()
