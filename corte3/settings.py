@@ -20,6 +20,11 @@ HEALTH_COLOR = 'red'
 ENERGY_COLOR = 'blue'
 UI_BORDER_COLOR_ACTIVE = 'gold'
 
+TEXT_COLOR_SELECTED = '#111111'
+BAR_COLOR = '#EEEEEE'
+BAR_COLOR_SELECTED = '#111111'
+UPGRADE_BG_COLOR_SELECTED = '#EEEEEE'
+
 weapon_data = {
     'sword':{'cooldown':100, 'damage':15, 'graphic': 'corte3/graficos/armas/sword/full.png'},
     'lance':{'cooldown':400, 'damage':30, 'graphic': 'corte3/graficos/armas/lance/full.png'},
