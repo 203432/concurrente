@@ -162,6 +162,18 @@ class Player(Entity):
 
         return base_damage + weapon_damage 
 
+    def get_full_magic_damage(self):
+        base_damage = self.stats['mana']
+        magic_damage = magic_data[self.magic]['strength']
+
+        return base_damage + magic_damage
+
+
+    def energy_recovery(self):
+        if self.energy < self.stats['estamina']:
+            self.energy += 0.01 * self.stats['mana']
+        else:
+            self.energy = self.stats['estamina'] 
 
     def update(self):
         self.input()
@@ -169,7 +181,7 @@ class Player(Entity):
         self.get_status()
         self.animate()
         self.move(self.speed)
-        
+        self.energy_recovery()        
         
     def run(self):
         self.update()
