@@ -1,4 +1,8 @@
 # Hecho por Jorge Alberto Camacho Toledo
+# El videojuego realizado se encuentra en la carpeta corte 3, y esta actividad fue realizada en conjunto a mis siguientes compañeros
+Jorge Alberto Camacho Toledo - 203432
+Marcos Ivan Orozco Reyes - 203413
+Gustavo Vladimir Rios Mena - 203450
 ### Notas sobre las practicas (en carpeta threading las encuentras)
 ```bash
 La practica01.py y practicaHilos01.py son las primeras realizadas, aunque practica01.py no ocupa hilos ya que es para comparar el funcionamiento de ambos.
@@ -23,10 +27,9 @@ pip install pytube
 pip install PyGreSQL
 ```
 
-
-## La actividad 5 esta en la carpeta corte 2 nombrada como UPPRO
- Se me olvido subir la version mostrada en clase:
- El commit "Meseros Fixed" Contiene la version mostrada el viernes 4
+```bash
+pip install pygame
+```
 
 
  
