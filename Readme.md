@@ -1,7 +1,7 @@
 # Hecho por Jorge Alberto Camacho Toledo
 # El videojuego realizado se encuentra en la carpeta corte 3, y esta actividad fue realizada en conjunto a mis siguientes compañeros
-Jorge Alberto Camacho Toledo - 203432
-Marcos Ivan Orozco Reyes - 203413
+Jorge Alberto Camacho Toledo - 203432  
+Marcos Ivan Orozco Reyes - 203413  
 Gustavo Vladimir Rios Mena - 203450
 ### Notas sobre las practicas (en carpeta threading las encuentras)
 ```bash
